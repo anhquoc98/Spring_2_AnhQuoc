@@ -2,6 +2,8 @@ import React from 'react';
 import './header.css'
 import {Link} from "react-router-dom";
 import lego from './1.png';
+import { HiShoppingCart } from 'react-icons/hi';
+
 function Header() {
     return (
         <>
@@ -34,6 +36,11 @@ function Header() {
                             <li className="nav-item">
                                 <Link to='/login' className="nav-link font-weight-bold text-uppercase">
                                     Đăng nhập
+                                </Link>
+                            </li>
+                            <li className="nav-item" style={{marginLeft: 'auto'}}>
+                                <Link to='/cart' className="nav-link font-weight-bold text-uppercase">
+                                    <HiShoppingCart style={{width:'100%'}}/>
                                 </Link>
                             </li>
                         </ul>

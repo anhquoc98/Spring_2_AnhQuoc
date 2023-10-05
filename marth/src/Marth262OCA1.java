@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Marth262 {
+public class Marth262OCA1 {
     public static void main(String[] args) {
         String str = "abcdde";
 

@@ -2,17 +2,39 @@ import React, {useEffect, useState} from 'react';
 import './home.css'
 import * as legoService from "../../service/legoService";
 import {Link} from "react-router-dom";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function Home() {
     const [legoList, setLegoList] = useState([])
+    const listLego = async () => {
+        let rs = await legoService.findByLego();
+        setLegoList(rs.content);
+        console.log(rs.content)
+    }
     useEffect(() => {
-        const listLego = async () => {
-            let rs = await legoService.findByLego();
-            setLegoList(rs.content);
-            console.log(rs.content)
-        }
         listLego()
     }, [])
+
+    const responsive = {
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: {max: 4000, min: 3000},
+            items: 5
+        },
+        desktop: {
+            breakpoint: {max: 3000, min: 1024},
+            items: 5
+        },
+        tablet: {
+            breakpoint: {max: 1024, min: 464},
+            items: 2
+        },
+        mobile: {
+            breakpoint: {max: 464, min: 0},
+            items: 1
+        }
+    };
 
     return (
         <>
@@ -84,23 +106,27 @@ function Home() {
                         <div className="row">
                             <div className="col-md-3">
                                 <h3 className="element-title text-capitalize my-3">Giao hàng nhanh </h3>
-                                <p>Dịch vụ đa dạng, chuyển phát nhanh, chuyển phát 55 giờ, chuyển phát đường bộ, giá hợp
+                                <p style={{fontFamily: 'initial'}}>Dịch vụ đa dạng, chuyển phát nhanh, chuyển phát 55
+                                    giờ, chuyển phát đường bộ, giá hợp
                                     lýChuyển phát 55h .Chuyển phát đường bộChuyển mọi trọng lượng.</p>
                             </div>
                             <div className="col-md-3">
                                 <h3 className="element-title text-capitalize my-3">Nhận trong cửa hàng</h3>
-                                <p>Lego kids chuyên nhận thiết kế đồ chơi với nhiều lego đa dạng phong cách từ diện tích
+                                <p style={{fontFamily: 'initial'}}>Lego kids chuyên nhận thiết kế đồ chơi với nhiều lego
+                                    đa dạng phong cách từ diện tích
                                     nhỏ, lớn khách nhau..</p>
                             </div>
                             <div className="col-md-3">
                                 <h3 className="element-title text-capitalize my-3">Bao bì đặc biệt</h3>
-                                <p>Một mùa Noel nữa lại sắp về, trong khi Lego Kids đựng những đồ chơi thêm rạng rỡ, các
+                                <p style={{fontFamily: 'initial'}}>Một mùa Noel nữa lại sắp về, trong khi Lego Kids đựng
+                                    những đồ chơi thêm rạng rỡ, các
                                     nhãn hàng cũng bắt đầu tung ra những dòng Lego
                                     đặc biệt chào đón Giáng Sinh..</p>
                             </div>
                             <div className="col-md-3">
                                 <h3 className="element-title text-capitalize my-3">Hoàn tiền trả lại</h3>
-                                <p>Những chính sách hoàn tiền đổi trả lại Lego hư hỏng. Chúng tôi áp dụng tại cửa hàng
+                                <p style={{fontFamily: 'initial'}}>Những chính sách hoàn tiền đổi trả lại Lego hư hỏng.
+                                    Chúng tôi áp dụng tại cửa hàng
                                     đảm bảo
                                     quyền lợi 100% cho khách hàng khi giao dịch cửa hàng chúng tôi</p>
                             </div>
@@ -136,39 +162,40 @@ function Home() {
                         <h3 className="text-uppercase">Sản phẩm mới</h3>
                     </div>
                     <div data-aos="fade-in" className="aos-init aos-animate">
-                        <div className="row row-cols-2 row-cols-md-3 row-cols-lg-5">
-                            {
-                                legoList.map((value, index) => (
-                                    <div className="col" key={index}>
-                                        <div className="card-container" style={{marginTop: '0px'}}>
-                                            <a href="/" className="hero-image-container">
-                                                <img className="hero-image"
-                                                     src={value.image}
-                                                     alt="Spinning glass cube"/>
-                                            </a>
-                                            <div className='mt-2'>
-                                                <button className='btn btn-outline-primary' style={{width: '100%'}}>Thêm
-                                                    vào giỏ
-                                                    hàng
-                                                </button>
-                                            </div>
-                                            <div
-                                                className="product-content d-flex justify-content-between align-items-center">
-                                                <h5 className="fs-5 mt-3">
-                                                    <Link to={`/product-detail/${value.id}`} style={{ color: 'white' }}>{value.name}</Link>
+                        <div className="row ">
+                            <Carousel autoPlay={true} responsive={responsive}>
+                                {
+                                    legoList.map((value, index) => (
+                                        <div className="col m-1" key={index}>
+                                            <div className="card-container" style={{marginTop: '0px'}}>
+                                                <Link to={`/product-detail/${value.id}`}
+                                                      className="hero-image-container">
+                                                    <img className="hero-image"
+                                                         src={value.image}
+                                                         alt="Spinning glass cube"/>
+                                                </Link>
+                                                <div className='mt-2'>
+                                                    <button className='btn btn-outline-primary'
+                                                            style={{width: '100%'}}>Thêm
+                                                        vào giỏ
+                                                        hàng
+                                                    </button>
+                                                </div>
+                                                <div
+                                                    className="product-content d-flex justify-content-between align-items-center">
+                                                    <h5 className="fs-5 mt-3"
+                                                        style={{color: 'white'}}>
+                                                        {value.name.length > 30 ? value.name.slice(0, 30) + '...' : value.name}
 
-                                                </h5>
-                                                <span>{value.price} VNĐ</span>
+                                                    </h5>
+                                                    <span>{value.price} VNĐ</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    ))
+                                }
+                            </Carousel>
 
-                                ))
-                            }
-
-                        </div>
-                        <div className="d-flex justify-content-center">
-                            <button className="btn">Tải thêm</button>
                         </div>
                     </div>
                 </div>
@@ -273,113 +300,43 @@ function Home() {
                         <h3 className="text-uppercase">Sản phẩm bán chạy</h3>
                     </div>
                     <div data-aos="fade-in" className="aos-init aos-animate">
-                        <div className="row row-cols-4">
-                            <div className="col">
-                                <div className="col">
-                                    <div className="card-container" style={{marginTop: '0px'}}>
-                                        <a href="/" className="hero-image-container">
-                                            <img className="hero-image"
-                                                 src="https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/co-the-apple-se-trang-bi-man-hinh-phu-cho-iphone-15-pro.jpg"
-                                                 alt="Spinning glass cube"/>
-                                        </a>
-                                        <div className='mt-2'>
-                                            <button className='btn btn-outline-primary' style={{width: '100%'}}>Thêm vào
-                                                giỏ
-                                                hàng
-                                            </button>
-                                        </div>
-                                        <div
-                                            className="product-content d-flex justify-content-between align-items-center">
-                                            <h5 className="fs-5 mt-3">
-                                                <a href="single-product.html" style={{color: 'white'}}>Iphone 15 ProMax
-                                                    White</a>
-                                            </h5>
-                                            <span>$95.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className="col">
-                                    <div className="card-container" style={{marginTop: '0px'}}>
-                                        <a href="/" className="hero-image-container">
-                                            <img className="hero-image"
-                                                 src="https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/co-the-apple-se-trang-bi-man-hinh-phu-cho-iphone-15-pro.jpg"
-                                                 alt="Spinning glass cube"/>
-                                        </a>
-                                        <div className='mt-2'>
-                                            <button className='btn btn-outline-primary' style={{width: '100%'}}>Thêm vào
-                                                giỏ
-                                                hàng
-                                            </button>
-                                        </div>
-                                        <div
-                                            className="product-content d-flex justify-content-between align-items-center">
-                                            <h5 className="fs-5 mt-3">
-                                                <a href="single-product.html" style={{color: 'white'}}>Iphone 15 ProMax
-                                                    White</a>
-                                            </h5>
-                                            <span>$95.00</span>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="row-cols-9">
+                            <Carousel responsive={responsive}>
+                                {
+                                    legoList.map((value, index) => (
+                                            <div className="col m-1">
+                                                <div className="card-container" style={{marginTop: '0px'}}>
+                                                    <Link to={`/product-detail/${value.id}`}
+                                                          className="hero-image-container">
+                                                        <img className="hero-image"
+                                                             src={value.image}
+                                                             alt="Spinning glass cube"/>
+                                                    </Link>
+                                                    <div className='mt-2'>
+                                                        <button className='btn btn-outline-primary'
+                                                                style={{width: '100%'}}>Thêm
+                                                            vào giỏ
+                                                            hàng
+                                                        </button>
+                                                    </div>
+                                                    <div
+                                                        className="product-content d-flex justify-content-between align-items-center">
+                                                        <h5 className="fs-5 mt-3"
+                                                            style={{color: 'white'}}>
+                                                            {value.name.length > 30 ? value.name.slice(0, 30) + '...' : value.name}
 
-                            </div>
-                            <div className="col">
-                                <div className="col">
-                                    <div className="card-container" style={{marginTop: '0px'}}>
-                                        <a href="/" className="hero-image-container">
-                                            <img className="hero-image"
-                                                 src="https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/co-the-apple-se-trang-bi-man-hinh-phu-cho-iphone-15-pro.jpg"
-                                                 alt="Spinning glass cube"/>
-                                        </a>
-                                        <div className='mt-2'>
-                                            <button className='btn btn-outline-primary' style={{width: '100%'}}>Thêm vào
-                                                giỏ
-                                                hàng
-                                            </button>
+                                                        </h5>
+                                                        <span>{value.price} VNĐ</span>
+                                                    </div>
+                                                </div>
                                         </div>
-                                        <div
-                                            className="product-content d-flex justify-content-between align-items-center">
-                                            <h5 className="fs-5 mt-3">
-                                                <a href="single-product.html" style={{color: 'white'}}>Iphone 15 ProMax
-                                                    White</a>
-                                            </h5>
-                                            <span>$95.00</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                    ))
+                                }
+                            </Carousel>
 
-                            </div>
-                            <div className="col">
-                                <div className="col">
-                                    <div className="card-container" style={{marginTop: '0px'}}>
-                                        <a href="/" className="hero-image-container">
-                                            <img className="hero-image"
-                                                 src="https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/co-the-apple-se-trang-bi-man-hinh-phu-cho-iphone-15-pro.jpg"
-                                                 alt="Spinning glass cube"/>
-                                        </a>
-                                        <div className='mt-2'>
-                                            <button className='btn btn-outline-primary' style={{width: '100%'}}>Thêm vào
-                                                giỏ
-                                                hàng
-                                            </button>
-                                        </div>
-                                        <div
-                                            className="product-content d-flex justify-content-between align-items-center">
-                                            <h5 className="fs-5 mt-3">
-                                                <a href="single-product.html" style={{color: 'white'}}>Iphone 15 ProMax
-                                                    White</a>
-                                            </h5>
-                                            <span>$95.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
                         <div className="d-flex justify-content-center">
-                            <button className="btn">Tải thêm</button>
+                            <Link to='/product' className="btn">Tải thêm</Link>
                         </div>
                     </div>
                 </div>

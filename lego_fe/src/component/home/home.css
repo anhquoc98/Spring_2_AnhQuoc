@@ -225,4 +225,12 @@ div.attribution {
     /* Your hover styles */
     background-color: #d764a9;
 }
+.card-container {
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
 
+.card-container:hover {
+    transform: scale(1.05); /* Tăng kích thước khi hover */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Hiển thị bóng đổ */
+}
