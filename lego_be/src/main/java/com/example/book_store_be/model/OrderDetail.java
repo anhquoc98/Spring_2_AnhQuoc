@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Integer id;
     private boolean isDelete;
     private Double total;
     private Integer quantity;
@@ -16,21 +16,29 @@ public class OrderDetail {
     @ManyToOne
     private Lego lego;
 
-    public OrderDetail(Long id, boolean isDelete, Double total, Integer quantity) {
+    public OrderDetail(Integer id, boolean isDelete, Double total, Integer quantity) {
         this.id = id;
         this.isDelete = isDelete;
         this.total = total;
         this.quantity = quantity;
     }
 
+    public Lego getLego() {
+        return lego;
+    }
+
+    public void setLego(Lego lego) {
+        this.lego = lego;
+    }
+
     public OrderDetail() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

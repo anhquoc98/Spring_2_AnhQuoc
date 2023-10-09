@@ -15,7 +15,6 @@ function Header() {
                         <img src={lego} style={{width:'100%'}} alt=""/>
                     </Link>
                     <div id="navbarContent" className="collapse navbar-collapse">
-                        {/*<img src='public/Lego.png' style={{width:'100%',height:'100%'}} alt=""/>*/}
                         <ul className="navbar-nav mx-auto">
 
                             <li className="nav-item">
@@ -38,9 +37,9 @@ function Header() {
                                     Đăng nhập
                                 </Link>
                             </li>
-                            <li className="nav-item" style={{marginLeft: 'auto'}}>
+                            <li className="nav-item right-align"> {/* Thêm lớp CSS vào đây */}
                                 <Link to='/cart' className="nav-link font-weight-bold text-uppercase">
-                                    <HiShoppingCart style={{width:'100%'}}/>
+                                    <HiShoppingCart style={{ width: '100%' }} />
                                 </Link>
                             </li>
                         </ul>

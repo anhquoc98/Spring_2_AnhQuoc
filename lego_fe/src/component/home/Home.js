@@ -167,12 +167,20 @@ function Home() {
                                 {
                                     legoList.map((value, index) => (
                                         <div className="col m-1" key={index}>
-                                            <div className="card-container" style={{marginTop: '0px'}}>
+                                            <div className="card-container" style={{marginTop: '0px',height:'30%'}}>
                                                 <Link to={`/product-detail/${value.id}`}
                                                       className="hero-image-container">
-                                                    <img className="hero-image"
-                                                         src={value.image}
-                                                         alt="Spinning glass cube"/>
+                                                    <img
+                                                        className="hero-image"
+                                                        src={value.image}
+                                                        alt="Spinning glass cube"
+                                                        style={{
+                                                            border: '2px solid #000',
+                                                            boxSizing: 'border-box', // Đảm bảo border được tính vào kích thước của ảnh
+                                                        }}
+                                                    />
+
+
                                                 </Link>
                                                 <div className='mt-2'>
                                                     <button className='btn btn-outline-primary'

@@ -3,6 +3,8 @@ import './cart.css'
 import Carousel from "react-multi-carousel";
 import {Link} from "react-router-dom";
 import * as legoService from "../../service/legoService";
+import PayPal from "../PayPal";
+import BPayPal from "../BPayPal";
 
 function Cart(props) {
     const [legoList, setLegoList] = useState([])
@@ -156,10 +158,8 @@ function Cart(props) {
                                         <p className="mb-2 fw-bold">$283.00</p>
                                     </div>
                                     <div className="mt-3">
-                                        <a href="src/component#" className="btn btn-secondary w-100 shadow-0 mb-2">
-                                            {" "}
-                                            Thanh toán giỏ hàng
-                                        </a>
+                                        <BPayPal/>
+
                                         <Link to='/product' className="btn btn-light w-100 border mt-2">
                                             {" "}
                                             Quay về sản phẩm

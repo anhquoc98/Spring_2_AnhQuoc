@@ -5,6 +5,7 @@ import * as legoService from "../../service/legoService";
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import {Carousel} from 'react-responsive-carousel';
+import BPayPal from "../BPayPal";
 
 function ProductDetail() {
     const param = useParams();
@@ -138,11 +139,8 @@ function ProductDetail() {
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" className="btn  shadow-0 m-1">
-                                    {" "}
-                                    Đặt hàng{" "}
-                                </a>
-                                <a href="#" className="btn shadow-0">
+                                <BPayPal/>
+                                <a href="#" className="btn  w-100 shadow-0 mb-2">
                                     {" "}
                                     <i className="me-1 fa fa-shopping-basket"/> Thêm vào giỏ hàng{" "}
                                 </a>
