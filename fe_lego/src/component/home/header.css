@@ -1,0 +1,32 @@
+
+
+body {
+    background: #da7da4;
+    background: -webkit-linear-gradient(to right, #f5eaef, #fcfcfd);
+    background: linear-gradient(to right, #fceded, #e7e0e3);
+    font-family: Arial;
+}
+
+
+
+code {
+    color: #a04db6;
+    background: #B5B5B5;
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.2rem;
+}
+
+.text-uppercase {
+    letter-spacing: 0.08em;
+}
+/* CSS cho thông báo */
+#notification {
+    position: absolute;
+    background-color: #e5cccc; /* Màu nền giống Facebook */
+    color: #040704;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    /*top: -8px; !* Điều chỉnh độ cao để thông báo hiển thị đúng vị trí *!*/
+    /*right: -8px; !* Điều chỉnh vị trí để thông báo hiển thị đúng vị trí *!*/
+}

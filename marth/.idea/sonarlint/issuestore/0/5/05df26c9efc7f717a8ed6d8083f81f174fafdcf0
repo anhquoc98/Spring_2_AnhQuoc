@@ -1,0 +1,10 @@
+
+p
+java:S2095"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(«§» øÿÿÿÿ8ğİ¹¹±1
+m
+java:S2095"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(«Şó°8ğİ¹¹±1
+]
+java:S2118"@Make the "object.Object" class "Serializable" or don't write it.(×ëöú8ıİ¹¹±1
+U	java:S106"9Replace this use of System.out or System.err by a logger.(±ç­Ô8€Åø•°1
+\
+java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8‡Ş¹¹±1

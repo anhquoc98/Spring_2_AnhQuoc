@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 public class Lego {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private Double price;
@@ -24,6 +24,10 @@ public class Lego {
     }
 
     public Lego() {
+    }
+
+    public Lego(Integer id) {
+        this.id = id;
     }
 
     public Integer getQuantity() {

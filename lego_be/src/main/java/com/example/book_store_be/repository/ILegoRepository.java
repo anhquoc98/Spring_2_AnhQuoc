@@ -7,8 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+
 @Repository
 public interface ILegoRepository extends JpaRepository<Lego,Integer> {
-    @Query(value = "select * from lego where name LIKE CONCAT('%', :name, '%')",nativeQuery = true)
-    Page<Lego> findAllByName(String name, Pageable pageable);
+    @Query(value = "SELECT * FROM lego WHERE name LIKE CONCAT('%', :name, '%')", nativeQuery = true)
+    Page<Lego> findAllByNameAndPrice(String name, Pageable pageable );
+
 }

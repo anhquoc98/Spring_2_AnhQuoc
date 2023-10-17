@@ -16,11 +16,14 @@ public class OrderDetailService implements IOrderDetailService {
 
     @Override
     public void addOrderDetail(OrderDetail orderDetail) {
-        OrderDetail orderDetail1 = orderDetailRepository.getReferenceById(orderDetail.getLego().getId());
+        OrderDetail orderDetail1 = orderDetailRepository.findByLego(orderDetail.getLego());
+        System.out.println(orderDetail1);
         if (orderDetail1 == null) {
-            orderDetailRepository.save(orderDetail1);
+            orderDetail.setQuantity(1);
+            orderDetailRepository.save(orderDetail);
         } else {
-            orderDetail1.setQuantity(orderDetail1.getQuantity() + 1);
+            orderDetail1.setQuantity(orderDetail1.getQuantity()+1);
+            orderDetailRepository.save(orderDetail1);
         }
     }
 
@@ -44,7 +47,7 @@ public class OrderDetailService implements IOrderDetailService {
 
     @Override
     public List<OrderDetail> listOrderDetail() {
-        return orderDetailRepository.findAll();
+        return orderDetailRepository.findAllBy();
     }
 
     @Override
@@ -59,7 +62,7 @@ public class OrderDetailService implements IOrderDetailService {
         double totalAmount = orderDetailRepository.findAll().stream()
                 .mapToDouble(orderDetail -> orderDetail.getQuantity() * orderDetail.getLego().getPrice())
                 .sum();
-
+        System.out.println(totalAmount);
         return totalAmount;
 
     }
